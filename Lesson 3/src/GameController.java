@@ -1,55 +1,60 @@
-import java.io.FileNotFoundException;
 import java.util.Scanner;
 import java.util.Random;
 
 public class GameController {
 
 	private int noOfGuesses=9;
-    boolean correct=false;
+	private static boolean correct=false;
 
-
-	public void guessLetters(String randomMovie,char[] movieNameHide) {
-
-		System.out.println("Guess the movie");
-		System.out.println("Enter a letter");
-		for(int j=0;j<10;j++)
-		{
-		Scanner scanner=new Scanner(System.in);
-		char guess=scanner.next().charAt(0);
-		for(int i=0;i<movieNameHide.length;i++)
-		{
-	    	
-	    	if(randomMovie.charAt(i)==guess)
-		   {	
-				
-				
-	     		
-			    movieNameHide[i]=guess;
-				System.out.println(movieNameHide);
-				noOfGuesses--;
-				System.out.println("\nEnter the next letter");
-                
-		   }
-	    	
-	    	
-		   
-		}
-		  
-		   System.out.println("You have guessed a wrong letter");
-    		System.out.println("\nYou have " +  noOfGuesses  + " chances " + " left " );
-    	
-	    	
-		 }
-		
-		
-		System.out.println("You lost");
-		
-		
-		
-}
-		
 	
-	public static void main (String [] args) throws FileNotFoundException
+
+	public void guessLetters(String randomMovie,char[] movieNameHiddenToArray) {
+
+		System.out.println("\nGuess the movie");
+		System.out.println("\nEnter a letter");
+		for(int j=1;j<=10;j++)
+		{
+			Scanner scanner=new Scanner(System.in);
+			char guess=scanner.next().charAt(0);
+
+
+			for(int i=0;i<movieNameHiddenToArray.length;i++)
+
+			{		    
+				if(randomMovie.charAt(i)==guess) 
+
+				{
+
+					movieNameHiddenToArray[i]=guess;
+					System.out.println(movieNameHiddenToArray);
+					//noOfGuesses--;
+					System.out.println("You have guessed the right letter");
+					System.out.println("\nEnter the next letter");
+					correct=true;
+					
+
+				}
+				
+				else {
+				correct=false;
+				}
+				
+			}
+			if(correct!=true)
+			{
+
+				System.out.println("You have entered a wrong letter,try again ");
+			}
+
+
+
+		}
+		
+		
+		System.out.println("You lost, all 10 chances are over");
+	}
+
+	public static void main (String [] args) 
 	{
 
 		System.out.println("I have generated a random movie name, try to guess it");
@@ -62,13 +67,13 @@ public class GameController {
 		int	indexOfRandomMovie=rand.nextInt(movies.length);
 		String randomMovie=  movies[indexOfRandomMovie];
 
-		System.out.println(randomMovie );
+		//System.out.println(randomMovie );
 		String movieNameHidden=randomMovie.replaceAll("[a-zA-Z]", "_");
 
 		System.out.println(movieNameHidden);
-		char[]  movieNameHide = movieNameHidden.toCharArray();
-		GameController gc=new GameController();
-		gc.guessLetters(randomMovie,movieNameHide);
+		char[]  movieNameHiddenToArray = movieNameHidden.toCharArray();
+		GameController gameController=new GameController();
+		gameController.guessLetters(randomMovie,movieNameHiddenToArray);
 
 
 	}
