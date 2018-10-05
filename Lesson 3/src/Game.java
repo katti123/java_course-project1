@@ -2,7 +2,7 @@ import java.util.Scanner;
 
 public class Game {
 
-	
+
 	public void guesstheMovie(String randomMovie,char[] movieNameHiddenToCharacters)
 	{
 		int tries=0;
@@ -10,9 +10,9 @@ public class Game {
 		System.out.println("\nEnter a letter");
 		boolean check=true;
 		while(check)
-				
+
 		{
-			
+
 			Scanner scanner=new Scanner(System.in);
 			char guess=scanner.next().charAt(0);
 			boolean correct=false;
@@ -25,45 +25,46 @@ public class Game {
 					movieNameHiddenToCharacters[i]=guess;
 					System.out.println(movieNameHiddenToCharacters);	
 					correct=true;
-					
+
 				}
-				
+
 			}
-			
+
 			if(correct)
-				
+
+			{
+				String movieGuessed=String.valueOf(movieNameHiddenToCharacters);
+
+				if(randomMovie.equals(movieGuessed))
 				{
-				String str=String.valueOf(movieNameHiddenToCharacters);
-			
-				if(randomMovie.equals(str))
-				{
-					System.out.println("Great!!! Congos! You win the game");
+					System.out.println("Great!!! Congos! You win");
+					check=false;
 				}
 				else {
-				System.out.println("You have guessed the right letter");
-				System.out.println("\nEnter the next letter");
-				System.out.println();
+					System.out.println("You have guessed the right letter");
+					System.out.println("\nEnter the next letter");
+					System.out.println();
 				}
-				
-				}
-			
+
+			}
+
 			else
-				
+
 			{   
 				System.out.println("This letter is not there in the movie title");
 				System.out.println(movieNameHiddenToCharacters);
 				tries++;
 				System.out.println("You lost " + tries + " points");
 			}
-			
+
 			if(tries==10)
 			{
-				
-			check=false;
-			System.out.println("Game over, You lost the game");
+
+				check=false;
+				System.out.println("Game over, You lost the game");
 			}
 
 		}
-}	
-	
+	}	
+
 }
