@@ -2,69 +2,88 @@ import java.util.Scanner;
 
 public class Game {
 
+	boolean check;
+	boolean correct;
+	int tries=0;
+	char[] movieNameHiddenToCharacters;
+	String randomMovie;
+	char guess;
+	
 
-	public void guesstheMovie(String randomMovie,char[] movieNameHiddenToCharacters)
+	public void checkForMatchingLetters(String randomMovie,char[] movieNameHiddenToCharacters)
+
 	{
-		int tries=0;
+		this.randomMovie=randomMovie;
+		this.movieNameHiddenToCharacters=movieNameHiddenToCharacters;
+		check=true;
 		System.out.println("\nGuess the movie");
 		System.out.println("\nEnter a letter");
-		boolean check=true;
 		while(check)
-
 		{
-
 			Scanner scanner=new Scanner(System.in);
-			char guess=scanner.next().charAt(0);
-			boolean correct=false;
-			for(int i=0;i<movieNameHiddenToCharacters.length;i++)
+			guess=scanner.next().charAt(0);
+			correct=false;
+			for(int i=0;i<this.movieNameHiddenToCharacters.length;i++)
 
 			{		    
 				if(randomMovie.charAt(i)==guess) 
 
 				{
-					movieNameHiddenToCharacters[i]=guess;
-					System.out.println(movieNameHiddenToCharacters);	
+					this.movieNameHiddenToCharacters[i]=guess;
+					System.out.println(this.movieNameHiddenToCharacters);	
 					correct=true;
-
+					
 				}
-
+				
 			}
-
-			if(correct)
-
-			{
-				String movieGuessed=String.valueOf(movieNameHiddenToCharacters);
-
-				if(randomMovie.equals(movieGuessed))
-				{
-					System.out.println("Great!!! Congos! You win");
-					check=false;
-				}
-				else {
-					System.out.println("You have guessed the right letter");
-					System.out.println("\nEnter the next letter");
-					System.out.println();
-				}
-
+			
+			if(correct) {
+				checkForWin();
 			}
-
 			else
-
-			{   
-				System.out.println("This letter is not there in the movie title");
-				System.out.println(movieNameHiddenToCharacters);
-				tries++;
-				System.out.println("You lost " + tries + " points");
-			}
-
-			if(tries==10)
 			{
-
-				check=false;
-				System.out.println("Game over, You lost the game");
+				checkForPointsLost();
 			}
+		}
 
 		}
-	}	
+	
+	
+	public void checkForWin()
+
+	{
+		{
+			
+		String movieGuessed=String.valueOf(this.movieNameHiddenToCharacters);
+			if(this.randomMovie.equals(movieGuessed))
+			{
+				System.out.println("Great!!! Congos! You win");
+				check=false;
+			}
+			else {
+				System.out.println("You have guessed the right letter");
+				System.out.println("\nEnter the next letter");
+			}
+		}
+	}
+
+	public void checkForPointsLost()
+	
+	{  
+		
+		tries++;
+		System.out.println("\nThis letter is not there in the movie title,try with different letter");
+		System.out.println("\nYou lost " + tries + " points");
+		System.out.println(this.movieNameHiddenToCharacters);
+		if(tries==10)
+		{
+
+			check=false;
+			System.out.println("Game over, You lost the game");
+		}
+
+	}
 
 }
+
+
