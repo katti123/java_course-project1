@@ -3,7 +3,7 @@ import java.util.Scanner;
 public class Game {
 
 	
-	public void guesstheMovie(String randomMovie,char[] movieNameHiddenToArray)
+	public void guesstheMovie(String randomMovie,char[] movieNameHiddenToCharacters)
 	{
 		int tries=0;
 		System.out.println("\nGuess the movie");
@@ -16,14 +16,14 @@ public class Game {
 			Scanner scanner=new Scanner(System.in);
 			char guess=scanner.next().charAt(0);
 			boolean correct=false;
-			for(int i=0;i<movieNameHiddenToArray.length;i++)
+			for(int i=0;i<movieNameHiddenToCharacters.length;i++)
 
 			{		    
 				if(randomMovie.charAt(i)==guess) 
 
 				{
-					movieNameHiddenToArray[i]=guess;
-					System.out.println(movieNameHiddenToArray);	
+					movieNameHiddenToCharacters[i]=guess;
+					System.out.println(movieNameHiddenToCharacters);	
 					correct=true;
 					
 				}
@@ -33,7 +33,7 @@ public class Game {
 			if(correct)
 				
 				{
-				String str=String.valueOf(movieNameHiddenToArray);
+				String str=String.valueOf(movieNameHiddenToCharacters);
 			
 				if(randomMovie.equals(str))
 				{
@@ -51,7 +51,7 @@ public class Game {
 				
 			{   
 				System.out.println("This letter is not there in the movie title");
-				System.out.println(movieNameHiddenToArray);
+				System.out.println(movieNameHiddenToCharacters);
 				tries++;
 				System.out.println("You lost " + tries + " points");
 			}
