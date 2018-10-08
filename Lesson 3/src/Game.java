@@ -1,3 +1,5 @@
+
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Game {
@@ -8,73 +10,81 @@ public class Game {
 	char[] movieNameHiddenToCharacters;
 	String randomMovie;
 	char guess;
+	int wrong=0;
 	
-
+	 private ArrayList<Character> wrongCharacters = new ArrayList<>();
+	
 	public void checkForMatchingLetters(String randomMovie,char[] movieNameHiddenToCharacters)
 
 	{
+
 		this.randomMovie=randomMovie;
 		this.movieNameHiddenToCharacters=movieNameHiddenToCharacters;
 		check=true;
-		System.out.println("\nGuess the movie");
-		System.out.println("\nEnter a letter");
+
 		while(check)
 		{
+			System.out.println("Guess a letter :" );
 			Scanner scanner=new Scanner(System.in);
 			guess=scanner.next().charAt(0);
 			correct=false;
 			for(int i=0;i<this.movieNameHiddenToCharacters.length;i++)
+			{
 
-			{		    
 				if(randomMovie.charAt(i)==guess) 
 
-				{
+				{   
 					this.movieNameHiddenToCharacters[i]=guess;
-					System.out.println(this.movieNameHiddenToCharacters);	
 					correct=true;
-					
+
 				}
-				
+
 			}
-			
 			if(correct) {
 				checkForWin();
 			}
 			else
 			{
-				checkForPointsLost();
+
+				checkForLoose();
 			}
 		}
 
-		}
-	
-	
-	public void checkForWin()
+	}
 
+
+	public void checkForWin()
 	{
 		{
-			
-		String movieGuessed=String.valueOf(this.movieNameHiddenToCharacters);
+
+
+			String movieGuessed=String.valueOf(this.movieNameHiddenToCharacters);
 			if(this.randomMovie.equals(movieGuessed))
 			{
-				System.out.println("Great!!! Congos! You win");
+				System.out.println("You win!");
+				System.out.println("You have guessed " + "'"+movieGuessed +"'"+" correctly");
 				check=false;
 			}
 			else {
-				System.out.println("You have guessed the right letter");
-				System.out.println("\nEnter the next letter");
+
+				System.out.println("You are guessing : " + movieGuessed);
+				System.out.println("You have guessed " + "(" + wrong + ")"  + " wrong letters" );
 			}
 		}
 	}
 
-	public void checkForPointsLost()
-	
-	{  
-		
+	public void checkForLoose()
+
+	{
+
+		wrong++;
+	 
+		wrongCharacters.add(guess);
+		String movieGuessed=String.valueOf(this.movieNameHiddenToCharacters);
+		System.out.println("You are guessing : " + movieGuessed);
+		System.out.println("You have guessed " + "(" + wrong + ")"  + " wrong letters:" + wrongCharacters);
 		tries++;
-		System.out.println("\nThis letter is not there in the movie title,try with different letter");
-		System.out.println("\nYou lost " + tries + " points");
-		System.out.println(this.movieNameHiddenToCharacters);
+
 		if(tries==10)
 		{
 
