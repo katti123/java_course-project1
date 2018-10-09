@@ -16,14 +16,13 @@ public class GameMain {
 		Scanner scanner=new Scanner(file);
 		while(scanner.hasNextLine())
 		{
-
 			movies.add(scanner.nextLine());
 			moviesListToArray  = movies.toArray(new String[]{});
 		}
 		Random rand=new Random();
 		int	indexOfRandomMovie=rand.nextInt(moviesListToArray.length);
 		String randomMovie=  moviesListToArray[indexOfRandomMovie];
-		String movieNameHidden=randomMovie.replaceAll("[a-zA-Z]", "_");
+		 String movieNameHidden	=randomMovie.replaceAll("[a-zA-Z]", "_");
 		System.out.println("You are guessing :" + movieNameHidden);
 		char[]  movieNameHiddenToCharacters = movieNameHidden.toCharArray();
 		Game game =new Game();

@@ -11,6 +11,7 @@ public class Game {
 	String randomMovie;
 	char guess;
 	int wrong=0;
+	int spaces=0;
 	
 	 private ArrayList<Character> wrongCharacters = new ArrayList<>();
 	
@@ -28,12 +29,13 @@ public class Game {
 			Scanner scanner=new Scanner(System.in);
 			guess=scanner.next().charAt(0);
 			correct=false;
+			
 			for(int i=0;i<this.movieNameHiddenToCharacters.length;i++)
 			{
-
+		
 				if(randomMovie.charAt(i)==guess) 
 
-				{   
+				{  
 					this.movieNameHiddenToCharacters[i]=guess;
 					correct=true;
 
@@ -56,8 +58,6 @@ public class Game {
 	public void checkForWin()
 	{
 		{
-
-
 			String movieGuessed=String.valueOf(this.movieNameHiddenToCharacters);
 			if(this.randomMovie.equals(movieGuessed))
 			{
@@ -78,7 +78,6 @@ public class Game {
 	{
 
 		wrong++;
-	 
 		wrongCharacters.add(guess);
 		String movieGuessed=String.valueOf(this.movieNameHiddenToCharacters);
 		System.out.println("You are guessing : " + movieGuessed);
@@ -89,7 +88,7 @@ public class Game {
 		{
 
 			check=false;
-			System.out.println("Game over, You lost the game");
+			System.out.println("Game over!, You lost the game");
 		}
 
 	}
